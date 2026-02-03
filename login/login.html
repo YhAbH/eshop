@@ -95,10 +95,7 @@
         <label>Contraseña</label>
         <input type="password" placeholder="Contraseña" required />
       </div>
-
-      <button type="button" onclick="window.location.href = '../index.html'">
-        Iniciar sesión
-      </button>
+      <button type="button" onclick="login()">Iniciar sesión</button>
     </form>
 
     <!-- 🧠 Registro del Service Worker -->
@@ -110,6 +107,23 @@
           .catch((err) => console.log("Error SW:", err));
       }
     </script>
-    <script src="./sw.js"></script>
+
+    <script>
+      function login() {
+        const inputs = document.querySelectorAll("input");
+        const usuario = inputs[0].value;
+        const pass = inputs[1].value;
+
+        if (usuario !== "" && pass !== "") {
+          // 🔐 Guardamos sesión falsa
+          localStorage.setItem("sesionActiva", "true");
+
+          // 🚀 Redirigir a la tienda
+          window.location.href = "../index.html";
+        } else {
+          alert("Completa los campos");
+        }
+      }
+    </script>
   </body>
 </html>

@@ -7,6 +7,12 @@
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#4CAF50" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Si NO hay sesión guardada → lo manda al login
+      if (localStorage.getItem("sesionActiva") !== "true") {
+        window.location.href = "login/login.html";
+      }
+    </script>
   </head>
 
   <body>

@@ -1,13 +1,6 @@
 const CACHE_NAME = "eshop-cache-v1"; // 🔥 nombre del cache
 
-const FILES_TO_CACHE = [
-  "/",
-  "/index.html",
-  "/login.html",
-  "/index.css",
-  "/manifest.json",
-  "/imgs/logo.png",
-];
+const FILES_TO_CACHE = ["/index.css", "/manifest.json", "/imgs/logo.png"];
 
 /* ================= INSTALL ================= */
 self.addEventListener("install", (event) => {
@@ -33,11 +26,16 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-/* ================= FETCH ================= */
 self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    caches
-      .match(event.request)
-      .then((response) => response || fetch(event.request)),
-  );
+  if (event.request.mode === "navigate") {
+    // 🔥 Páginas HTML → siempre intenta red primero
+    event.respondWith(
+      fetch(event.request).catch(() => caches.match("/login.html")),
+    );
+  } else {
+    // Archivos estáticos → cache first
+    event.respondWith(
+      caches.match(event.request).then((res) => res || fetch(event.request)),
+    );
+  }
 });
