@@ -1,7 +1,7 @@
 {
   "name": "E-Shop",
   "short_name": "Login",
-  "start_url": "login.html",
+  "start_url": "login/login.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
