@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>E-Shop</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#4CAF50" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    <div class="sidebar" id="sidebar">
+      <h3>Menú</h3>
+      <a href="#" style="color: white; display: block; margin: 10px 0"
+        >Inicio</a
+      >
+      <button onclick="toggleMenu()">Cerrar</button>
+    </div>
+
+    <div class="navbar">
+      <div class="menu-btn" onclick="toggleMenu()">☰</div>
+      <div class="title">E-Shop</div>
+      <div class="logo"><img src="imgs/logo.png" /></div>
+    </div>
+
+    <div class="container">
+      <div class="card">
+        <div class="img-placeholder">
+          <img
+            src="imgs/audufonos.webp"
+            alt="Audífonos"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+        </div>
+        <p><strong>Audífonos Bluetooth</strong></p>
+        <p>Sonido estéreo, batería de larga duración</p>
+        <p><strong>$599 MXN</strong></p>
+      </div>
+
+      <div class="card">
+        <div class="img-placeholder">
+          <img
+            src="imgs/Smartwatch.webp"
+            alt="Smartwatch"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+        </div>
+        <p><strong>Smartwatch Deportivo</strong></p>
+        <p>Monitor de ritmo cardiaco y pasos</p>
+        <p><strong>$899 MXN</strong></p>
+      </div>
+
+      <div class="card">
+        <div class="img-placeholder">
+          <img
+            src="imgs/Teclado_Mecánico.jpeg"
+            alt="Teclado"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+        </div>
+        <p><strong>Teclado Mecánico</strong></p>
+        <p>Iluminación RGB y switches azules</p>
+        <p><strong>$1,299 MXN</strong></p>
+      </div>
+
+      <div class="card">
+        <div class="img-placeholder">
+          <img
+            src="imgs/MouseGamer.jpeg"
+            alt="Mouse"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+        </div>
+        <p><strong>Mouse Gamer</strong></p>
+        <p>Alta precisión, 7200 DPI</p>
+        <p><strong>$449 MXN</strong></p>
+      </div>
+
+      <div class="card">
+        <div class="img-placeholder">
+          <img
+            src="imgs/BocinaBluetooth.jpeg"
+            alt="Bocina"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+        </div>
+        <p><strong>Bocina Bluetooth</strong></p>
+        <p>Sonido potente y resistente al agua</p>
+        <p><strong>$699 MXN</strong></p>
+      </div>
+
+      <div class="card">
+        <div class="img-placeholder">
+          <img
+            src="imgs/PowerBank.jpeg"
+            alt="Power Bank"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+        </div>
+        <p><strong>Power Bank 20,000 mAh</strong></p>
+        <p>Carga rápida para varios dispositivos</p>
+        <p><strong>$549 MXN</strong></p>
+      </div>
+
+      <div class="card">
+        <div class="img-placeholder">
+          <img
+            src="imgs/SoporteLaptop.jpeg"
+            alt="Laptop Stand"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+        </div>
+        <p><strong>Soporte para Laptop</strong></p>
+        <p>Ergonómico y ajustable</p>
+        <p><strong>$399 MXN</strong></p>
+      </div>
+
+      <div class="card">
+        <div class="img-placeholder">
+          <img
+            src="imgs/CargadorUSB-C.jpeg"
+            alt="Cargador"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+        </div>
+        <p><strong>Cargador USB-C</strong></p>
+        <p>Carga rápida 30W</p>
+        <p><strong>$299 MXN</strong></p>
+      </div>
+    </div>
+
+    <script>
+      function toggleMenu() {
+        document.getElementById("sidebar").classList.toggle("active");
+      }
+    </script>
+    <script>
+      if ("serviceWorke]]r" in navigator) {
+        navigator.serviceWorker.register("sw.js");
+      }
+    </script>
+  </body>
+</html>

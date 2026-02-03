@@ -1,0 +1,109 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #ffffff;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  height: 70px;
+  background: #3b6ae2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: relative;
+  border-bottom: 2px solid #2a4db3;
+}
+
+.menu-btn {
+  font-size: 40px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32px;
+  font-family: "Georgia", serif;
+  font-style: italic;
+}
+
+.logo img {
+  height: 45px;
+  object-fit: contain;
+}
+
+/* ===== GRID ===== */
+.container {
+  padding: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== CARD ===== */
+.card {
+  background: #d9d9d9;
+  padding: 25px 15px;
+  text-align: left;
+  min-height: 250px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== IMÁGENES ===== */
+.card .img-placeholder {
+  background: #fff;
+  width: 100%;
+  height: 150px;
+  margin: 0 auto 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.card p {
+  margin: 5px 0;
+  font-size: 18px;
+  font-weight: 500;
+  padding-left: 10%;
+}
+
+/* ===== MENU LATERAL ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background: #2f3e9e;
+  color: white;
+  padding: 20px;
+  transition: left 0.3s;
+  z-index: 100;
+}
+
+.sidebar.active {
+  left: 0;
+}

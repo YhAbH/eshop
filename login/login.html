@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+
+    <!-- 📱 Manifest PWA -->
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Color barra navegador -->
+    <meta name="theme-color" content="#000000" />
+
+    <style>
+      body {
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+      }
+
+      .login-box {
+        border: 2px solid #000;
+        padding: 30px;
+        width: 320px;
+        height: 70%;
+        background: #fff;
+        border-radius: 6px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* 🧩 Título + logo */
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .header img {
+        width: 32px;
+        height: 32px;
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
+        flex: 1;
+      }
+
+      label {
+        margin-bottom: 5px;
+      }
+
+      input {
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #000;
+        border-radius: 4px;
+      }
+
+      button {
+        padding: 12px;
+        background: #000;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 35px;
+      }
+
+      button:hover {
+        background: #333;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form class="login-box">
+      <!-- 🔹 Login + Logo -->
+      <div class="header">
+        <h1>Login</h1>
+        <img src="../imgs/logo.png" alt="Logo" />
+      </div>
+
+      <div class="content">
+        <label>Usuario</label>
+        <input type="text" placeholder="Usuario" required />
+
+        <label>Contraseña</label>
+        <input type="password" placeholder="Contraseña" required />
+      </div>
+
+      <button type="button" onclick="window.location.href = '../index.html'">
+        Iniciar sesión
+      </button>
+    </form>
+
+    <!-- 🧠 Registro del Service Worker -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("sw.js")
+          .then(() => console.log("Service Worker registrado"))
+          .catch((err) => console.log("Error SW:", err));
+      }
+    </script>
+    <script src="./sw.js"></script>
+  </body>
+</html>
