@@ -11,71 +11,111 @@
     <meta name="theme-color" content="#000000" />
 
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
       body {
-        height: 100vh;
         margin: 0;
+        min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: Arial, sans-serif;
-        background: #f2f2f2;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #3b6ae2, #2f3e9e);
+        padding: 15px;
       }
 
+      /* 📦 CAJA LOGIN */
       .login-box {
-        border: 2px solid #000;
-        padding: 30px;
-        width: 320px;
-        height: 70%;
+        width: 100%;
+        max-width: 380px;
         background: #fff;
-        border-radius: 6px;
+        border-radius: 12px;
+        padding: 30px 25px;
         display: flex;
         flex-direction: column;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
       }
 
-      /* 🧩 Título + logo */
+      /* 🧩 HEADER */
       .header {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 10px;
-        margin-top: 10px;
+        margin-bottom: 35px;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 26px;
       }
 
       .header img {
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 36px;
       }
 
+      /* ✏️ CAMPOS */
       .content {
         display: flex;
         flex-direction: column;
-        margin-top: 50px;
-        flex: 1;
       }
 
       label {
+        font-size: 14px;
         margin-bottom: 5px;
       }
 
       input {
-        padding: 10px;
+        padding: 12px;
         margin-bottom: 20px;
-        border: 1px solid #000;
-        border-radius: 4px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+        transition:
+          border 0.2s,
+          box-shadow 0.2s;
       }
 
+      input:focus {
+        outline: none;
+        border-color: #3b6ae2;
+        box-shadow: 0 0 5px rgba(59, 106, 226, 0.5);
+      }
+
+      /* 🔘 BOTÓN */
       button {
-        padding: 12px;
-        background: #000;
-        color: #fff;
+        padding: 13px;
+        background: #3b6ae2;
+        color: white;
         border: none;
-        border-radius: 4px;
+        border-radius: 6px;
+        font-size: 15px;
         cursor: pointer;
-        margin-bottom: 35px;
+        transition:
+          background 0.2s,
+          transform 0.1s;
       }
 
       button:hover {
-        background: #333;
+        background: #2a4db3;
+      }
+
+      button:active {
+        transform: scale(0.98);
+      }
+
+      /* 📱 Ajuste pantallas muy pequeñas */
+      @media (max-width: 350px) {
+        .login-box {
+          padding: 20px 15px;
+        }
+
+        .header h1 {
+          font-size: 20px;
+        }
       }
     </style>
   </head>
