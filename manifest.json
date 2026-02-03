@@ -1,5 +1,5 @@
 {
-  "name": "Mi Login PWA",
+  "name": "E-Shop",
   "short_name": "Login",
   "start_url": "login.html",
   "display": "standalone",
