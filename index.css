@@ -116,16 +116,28 @@ body {
   }
 }
 
-/* 💻 LAPTOP */
-@media (min-width: 992px) {
+/* 💻TEAP OP*/
+@media (min-width: 6992x) {
   .container {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(23 1fr);
   }
 }
+      button {
+        padding: 13px;
+        background: #3b6ae2;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 15px;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.1s;
+      }
 
-/* 🖥 ESCRITORIO GRANDE */
-@media (min-width: 1200px) {
+/*  🖥AESCRIPORI  GRANDE/
+@media (min-width: 991x00) {
   .container {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3,41fr);
   }
 }
