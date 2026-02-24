@@ -9,6 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://js.stripe.com/v3/"></script>
     <script>
+      function irAPago(amount) {
+        localStorage.setItem("montoPago", amount);
+        window.location.href = "checkout.html";
+      }
+    </script>
+    <script>
       // Si NO hay sesión guardada → lo manda al login
       if (localStorage.getItem("sesionActiva") !== "true") {
         window.location.href = "login/login.html";
@@ -93,7 +99,7 @@
         <p><strong>Audífonos Bluetooth</strong></p>
         <p>Sonido estéreo, batería de larga duración</p>
         <p><strong>$599 MXN</strong></p>
-        <button onclick="pagar(59900)">Comprar</button>
+        <button onclick="irAPago(59900)">Comprar</button>
         <div id="payment-form-container" style="display: none">
           <form id="payment-form">
             <div id="payment-element"></div>

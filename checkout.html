@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Checkout - E-Shop</title>
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #3b6ae2, #2145a1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .checkout-card {
+        background: white;
+        padding: 40px;
+        width: 400px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .price {
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: #555;
+      }
+
+      #payment-element {
+        margin-bottom: 20px;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        background-color: #3b6ae2;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background-color: #1e429c;
+      }
+
+      #error-message {
+        margin-top: 10px;
+        color: red;
+        text-align: center;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="checkout-card">
+      <h2>Finalizar compra</h2>
+      <div class="price" id="precio-texto"></div>
+
+      <div id="payment-element"></div>
+
+      <button id="submit">Pagar ahora</button>
+      <div id="error-message"></div>
+    </div>
+
+    <script>
+      let stripe = Stripe(
+        "pk_test_51T4LlEDYKJ7AqSVr9lEGW3rkmR3Br5TDt2MfksB5RPRn1eErRXNqUOmYewVlVTcgcLgxU6DL0ch4MT9mzvyl8ys000K7C0Vbao",
+      );
+      let elements;
+      let paymentElement;
+
+      async function iniciarPago() {
+        const amount = localStorage.getItem("montoPago");
+
+        document.getElementById("precio-texto").innerText =
+          "Total: $" + (amount / 100).toFixed(2) + " MXN";
+
+        const response = await fetch(
+          "https://eshop-backend-6pwq.onrender.com/create-payment-intent",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ amount }),
+          },
+        );
+
+        const { clientSecret } = await response.json();
+
+        elements = stripe.elements({ clientSecret });
+        paymentElement = elements.create("payment");
+        paymentElement.mount("#payment-element");
+      }
+
+      document.getElementById("submit").onclick = async () => {
+        const { error } = await stripe.confirmPayment({
+          elements,
+          confirmParams: {
+            return_url: window.location.origin + "/index.html",
+          },
+        });
+
+        if (error) {
+          document.getElementById("error-message").textContent = error.message;
+        }
+      };
+
+      iniciarPago();
+    </script>
+  </body>
+</html>
