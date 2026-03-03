@@ -22,15 +22,14 @@
         width: 400px;
         border-radius: 12px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        text-align: center;
       }
 
       h2 {
-        text-align: center;
         margin-bottom: 10px;
       }
 
       .price {
-        text-align: center;
         font-size: 18px;
         margin-bottom: 20px;
         color: #555;
@@ -38,6 +37,7 @@
 
       #payment-element {
         margin-bottom: 20px;
+        text-align: left;
       }
 
       button {
@@ -59,14 +59,37 @@
       #error-message {
         margin-top: 10px;
         color: red;
-        text-align: center;
         font-size: 14px;
+      }
+
+      .success {
+        color: green;
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
+
+      .processing {
+        color: orange;
+        font-size: 18px;
+      }
+
+      .failed {
+        color: red;
+        font-size: 18px;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        text-decoration: none;
+        color: #3b6ae2;
+        font-weight: bold;
       }
     </style>
   </head>
 
   <body>
-    <div class="checkout-card">
+    <div class="checkout-card" id="checkout-container">
       <h2>Finalizar compra</h2>
       <div class="price" id="precio-texto"></div>
 
@@ -80,11 +103,49 @@
       let stripe = Stripe(
         "pk_test_51T4LlEDYKJ7AqSVr9lEGW3rkmR3Br5TDt2MfksB5RPRn1eErRXNqUOmYewVlVTcgcLgxU6DL0ch4MT9mzvyl8ys000K7C0Vbao",
       );
+
       let elements;
-      let paymentElement;
+
+      function verificarEstadoPago() {
+        const params = new URLSearchParams(window.location.search);
+        const status = params.get("redirect_status");
+
+        if (!status) return;
+
+        const container = document.getElementById("checkout-container");
+
+        if (status === "succeeded") {
+          localStorage.removeItem("montoPago");
+
+          container.innerHTML = `
+            <div class="success">✅ Pago realizado con éxito</div>
+            <p>Gracias por tu compra.</p>
+            <a href="index.html" class="back-link">Volver a la tienda</a>
+          `;
+        }
+
+        if (status === "processing") {
+          container.innerHTML = `
+            <div class="processing">⏳ Tu pago está en proceso.</div>
+            <p>Te notificaremos cuando se confirme.</p>
+            <a href="index.html" class="back-link">Volver</a>
+          `;
+        }
+
+        if (status === "failed") {
+          container.innerHTML = `
+            <div class="failed">❌ El pago fue rechazado.</div>
+            <p>Intenta nuevamente.</p>
+            <a href="index.html" class="back-link">Volver</a>
+          `;
+        }
+      }
 
       async function iniciarPago() {
+        verificarEstadoPago();
+
         const amount = localStorage.getItem("montoPago");
+        if (!amount) return;
 
         document.getElementById("precio-texto").innerText =
           "Total: $" + (amount / 100).toFixed(2) + " MXN";
@@ -101,22 +162,24 @@
         const { clientSecret } = await response.json();
 
         elements = stripe.elements({ clientSecret });
-        paymentElement = elements.create("payment");
+
+        const paymentElement = elements.create("payment");
         paymentElement.mount("#payment-element");
+
+        document.getElementById("submit").onclick = async () => {
+          const { error } = await stripe.confirmPayment({
+            elements,
+            confirmParams: {
+              return_url: window.location.origin + "/checkout.html",
+            },
+          });
+
+          if (error) {
+            document.getElementById("error-message").textContent =
+              error.message;
+          }
+        };
       }
-
-      document.getElementById("submit").onclick = async () => {
-        const { error } = await stripe.confirmPayment({
-          elements,
-          confirmParams: {
-            return_url: window.location.origin + "/index.html",
-          },
-        });
-
-        if (error) {
-          document.getElementById("error-message").textContent = error.message;
-        }
-      };
 
       iniciarPago();
     </script>
