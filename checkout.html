@@ -144,7 +144,7 @@
       async function iniciarPago() {
         verificarEstadoPago();
 
-        const amount = localStorage.getItem("montoPago");
+        const amount = parseInt(localStorage.getItem("montoPago"));
         if (!amount) return;
 
         document.getElementById("precio-texto").innerText =
