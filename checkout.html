@@ -118,26 +118,26 @@
           localStorage.removeItem("montoPago");
 
           container.innerHTML = `
-            <div class="success">✅ Pago realizado con éxito</div>
-            <p>Gracias por tu compra.</p>
-            <a href="index.html" class="back-link">Volver a la tienda</a>
-          `;
+      <div class="success">✅ Pago realizado con éxito</div>
+      <p>Tu compra fue procesada correctamente.</p>
+      <a href="index.html" class="back-link">Volver a la tienda</a>
+    `;
         }
 
         if (status === "processing") {
           container.innerHTML = `
-            <div class="processing">⏳ Tu pago está en proceso.</div>
-            <p>Te notificaremos cuando se confirme.</p>
-            <a href="index.html" class="back-link">Volver</a>
-          `;
+      <div class="processing">⏳ Pago en proceso</div>
+      <p>Tu banco está confirmando el pago.</p>
+      <a href="index.html" class="back-link">Volver</a>
+    `;
         }
 
-        if (status === "failed") {
+        if (status === "requires_payment_method") {
           container.innerHTML = `
-            <div class="failed">❌ El pago fue rechazado.</div>
-            <p>Intenta nuevamente.</p>
-            <a href="index.html" class="back-link">Volver</a>
-          `;
+      <div class="failed">❌ Pago rechazado</div>
+      <p>Intenta nuevamente con otra tarjeta.</p>
+      <a href="index.html" class="back-link">Volver</a>
+    `;
         }
       }
 
